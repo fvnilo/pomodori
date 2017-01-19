@@ -1,0 +1,9 @@
+export const START = 'START';
+export const STOP = 'STOP';
+export const TICK = 'TICK';
+export const RESUME = 'RESUME';
+export const START_BREAK = 'START_BREAK';
+export const END = 'END';
+export const RESET = 'RESET';
+export const INCREASE_POMODORI_COUNT = 'INCREASE_POMODORI_COUNT';
+export const DECREASE_POMODORI_COUNT = 'DECREASE_POMODORI_COUNT';

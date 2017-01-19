@@ -1,0 +1,31 @@
+@import 'colors';
+
+button {
+  padding: 0;
+  border: none;
+  background: none;
+  background-repeat:no-repeat;
+}
+
+.button {
+    color: $text-color;
+    border: 2px solid $text-color;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: $secondary-color;
+}
+
+.button:active {
+    background-color: $active-color;
+}
+
+input {
+  outline: none;
+  background: transparent;
+
+  border: 0;
+  border-bottom: 1px solid $text-color;
+  color: $text-color;
+}

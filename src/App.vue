@@ -12,41 +12,35 @@
         </div>
       </div>
     </div>
-      <div class="ui middle aligned center aligned main container">
-        <div class="column">
-          <div class="ui one column center aligned page grid">
-            <div class="column twelve wide">
-              <h2 class="ui header stopped" v-if="isFinished">Yay! You Finished Your {{ pomodoriCount }} Pomodori</h2>
-              <h2 class="ui header idle" v-if="isIdle || isFinished">Choose How Many Pomodori You Want To Complete</h2>
-              <h2 class="ui header active" v-if="isInProgress">Pomodoro In Progress</h2>
-              <h2 class="ui header pause" v-if="isBreak">You Deserve A Break!</h2>
-              <h2 class="ui header stopped" v-if="isStopped">Need A (Longer) Break?</h2>
-    
-              <numeric-selector class="pomodori-count" 
-                v-if="isIdle || isFinished"
-                :value="pomodoriCount" 
-                @increase="increase"
-                @decrease="decrease">  
-              </numeric-selector>
-    
-              <timer v-if="isActive || isStopped" :value="remainingTime"></timer>
-      
-              <div class="button-container">
-                <button class="ui icon button huge" v-if="isIdle || isFinished" @click="start()">
-                  <i class="play icon"></i> Start
-                </button>
-                <button class="ui icon button huge" v-if="isActive" @click="stop()">
-                  <i class="pause icon"></i> Pause
-                </button>
-                <button class="ui icon button huge" v-if="isStopped" @click="resume()">
-                  <i class="pause icon"></i> Resume
-                </button>
-                <button class="ui icon button huge" v-if="isStopped" @click="reset()">
-                  <i class="refresh icon"></i> Reset
-                </button>  
-              </div>
-            </div>
-          </div> 
+      <div class="ui center aligned main container">
+        <h2 class="ui header stopped" v-if="isFinished">Yay! You Finished Your {{ pomodoriCount }} Pomodori</h2>
+        <h2 class="ui header idle" v-if="isIdle || isFinished">Choose How Many Pomodori You Want To Complete</h2>
+        <h2 class="ui header active" v-if="isInProgress">Pomodoro In Progress</h2>
+        <h2 class="ui header pause" v-if="isBreak">You Deserve A Break!</h2>
+        <h2 class="ui header stopped" v-if="isStopped">Need A (Longer) Break?</h2>
+
+        <numeric-selector class="pomodori-count" 
+          v-if="isIdle || isFinished"
+          :value="pomodoriCount" 
+          @increase="increase"
+          @decrease="decrease">  
+        </numeric-selector>
+
+        <timer v-if="isActive || isStopped" :value="remainingTime"></timer>
+
+        <div class="button-container">
+          <button class="ui icon button huge" v-if="isIdle || isFinished" @click="start()">
+            <i class="play icon"></i> Start
+          </button>
+          <button class="ui icon button huge" v-if="isActive" @click="stop()">
+            <i class="pause icon"></i> Pause
+          </button>
+          <button class="ui icon button huge" v-if="isStopped" @click="resume()">
+            <i class="pause icon"></i> Resume
+          </button>
+          <button class="ui icon button huge" v-if="isStopped" @click="reset()">
+            <i class="refresh icon"></i> Reset
+          </button>  
         </div>
       </div>
     </div>

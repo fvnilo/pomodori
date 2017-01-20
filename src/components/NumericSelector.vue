@@ -4,7 +4,7 @@
       <i class="minus big icon"></i>
     </a>
     <div class="ui massive input">
-      <input type="number" min="0" :value="value" disabled>  
+      <input type="number" min="1" :value="value" disabled>  
     </div>
     <a class="increase" @click="increase()">
       <i class="plus big icon"></i>
@@ -26,7 +26,7 @@ export default {
 
   methods: {
     decrease() {
-      if (this.value > 0) {
+      if (this.value > 1) {
         this.$emit('decrease');
       }
     },

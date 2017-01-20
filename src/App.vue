@@ -12,7 +12,10 @@
         </div>
       </div>
     </div>
-      <div class="ui center aligned main container">
+      <div class="ui main text container intro">
+        Pomodori helps you be more productive by telling you when to work and when to take a break. You only need to enter the number of pomodoro sessions you want to complete and one sitting and Pomodori will notify you when to cool down!
+      </div>
+      <div class="ui center aligned main container timer">
         <h2 class="ui header stopped" v-if="isFinished">Yay! You Finished Your {{ pomodoriCount }} Pomodori</h2>
         <h2 class="ui header idle" v-if="isIdle || isFinished">Choose How Many Pomodori You Want To Complete</h2>
         <h2 class="ui header active" v-if="isInProgress">Pomodoro In Progress</h2>
@@ -28,7 +31,7 @@
 
         <timer v-if="isActive || isStopped" :value="remainingTime"></timer>
 
-        <div class="button-container">
+        <div class="buttons">
           <button class="ui icon button huge" v-if="isIdle || isFinished" @click="start()">
             <i class="play icon"></i> Start
           </button>
@@ -41,6 +44,11 @@
           <button class="ui icon button huge" v-if="isStopped" @click="reset()">
             <i class="refresh icon"></i> Reset
           </button>  
+        </div>
+      </div>
+      <div class="ui inverted vertical footer segment fixed">
+        <div class="ui center aligned container">
+          Keep Calm And Start Pomodoroing
         </div>
       </div>
     </div>
@@ -96,7 +104,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.main.container {
-  padding-top: 13em;
+.main.container.intro {
+  padding-top: 8em;
+}
+
+.main.container.timer {
+  padding-top: 10em;
+}
+
+.ui.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 </style>

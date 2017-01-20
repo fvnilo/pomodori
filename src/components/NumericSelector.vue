@@ -1,13 +1,13 @@
 <template>
   <div class="numeric-selector">
     <a class="decrease" @click="decrease()">
-      <i class="minus big icon"></i>
+      <i class="caret left huge icon"></i>
     </a>
-    <div class="ui massive input">
-      <input type="number" min="1" :value="value" disabled>  
+    <div class="value">
+      <span>{{ value }}</span>  
     </div>
     <a class="increase" @click="increase()">
-      <i class="plus big icon"></i>
+      <i class="caret right huge icon"></i>
     </a>
   </div>
     
@@ -39,9 +39,16 @@ export default {
 </script>
 
 <style scoped>
-.input {
-  margin: 0.5em 0;
-  width: 4.5em;
+.numeric-selector {
+  display: flex;
+  justify-content: center;
+}
+.value {
+  font-size: 3em;
+  color: rgba(0, 0, 0, 0.6);
+  text-align: center;
+  vertical-align: middle;
+  line-height: 1.3em;
 }
 
 a {

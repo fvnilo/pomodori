@@ -107,11 +107,12 @@ export default {
 .main.container.intro {
   padding-top: 8em;
 }
-
 .main.container.timer {
-  padding-top: 10em;
+  padding-top: 5em;
 }
-
+.buttons {
+  padding-top: 1em;
+}
 .ui.footer {
   position: absolute;
   bottom: 0;

@@ -1,35 +1,55 @@
 <template>
   <div id="app">
-    <div class="timer-container">
-        <span class="title stopped" v-if="isFinished">Yay! You Finished Your {{ pomodoriCount }} Pomodori</span>
-        <span class="title idle" v-if="isIdle || isFinished">How Many Pomodori?</span>
-        <span class="title active" v-if="isInProgress">Pomodoro In Progress</span>
-        <span class="title pause" v-if="isBreak">You Deserve A Break!</span>
-        <span class="title stopped" v-if="isStopped">Need A (Longer) Break?</span>
-        
-        <numeric-selector class="pomodori-count" 
-          v-if="isIdle || isFinished"
-          :value="pomodoriCount" 
-          @increase="increase"
-          @decrease="decrease">  
-        </numeric-selector>
-        <timer v-if="isActive || isStopped" :value="remainingTime"></timer>
-        <div class="button-container">
-          <button class="button start" v-if="isIdle || isFinished" @click="start()">
-            <i class="fa fa-3x fa-play" aria-hidden="true"></i>
-          </button>
-          <button class="button stop" v-if="isActive" @click="stop()">
-            <i class="fa fa-3x fa-pause" aria-hidden="true"></i>
-          </button>
-          <button class="button resume" v-if="isStopped" @click="resume()">
-            <i class="fa fa-3x fa-play" aria-hidden="true"></i>
-          </button>
-          <button class="button reset" v-if="isStopped" @click="reset()">
-            <i class="fa fa-3x fa-refresh" aria-hidden="true"></i>
-          </button>  
+    <div class="ui fixed inverted menu">
+      <div class="ui container">
+        <span class="header item">
+          Pomodori
+        </span>
+      </div>
+      <div class="right menu">
+        <div class="ui right item">
+          <i class="help icon"></i>
         </div>
+      </div>
     </div>
-  </div>
+      <div class="ui middle aligned center aligned main container">
+        <div class="column">
+          <div class="ui one column center aligned page grid">
+            <div class="column twelve wide">
+              <h2 class="ui header stopped" v-if="isFinished">Yay! You Finished Your {{ pomodoriCount }} Pomodori</h2>
+              <h2 class="ui header idle" v-if="isIdle || isFinished">Choose How Many Pomodori You Want To Complete</h2>
+              <h2 class="ui header active" v-if="isInProgress">Pomodoro In Progress</h2>
+              <h2 class="ui header pause" v-if="isBreak">You Deserve A Break!</h2>
+              <h2 class="ui header stopped" v-if="isStopped">Need A (Longer) Break?</h2>
+    
+              <numeric-selector class="pomodori-count" 
+                v-if="isIdle || isFinished"
+                :value="pomodoriCount" 
+                @increase="increase"
+                @decrease="decrease">  
+              </numeric-selector>
+    
+              <timer v-if="isActive || isStopped" :value="remainingTime"></timer>
+      
+              <div class="button-container">
+                <button class="ui icon button huge" v-if="isIdle || isFinished" @click="start()">
+                  <i class="play icon"></i> Start
+                </button>
+                <button class="ui icon button huge" v-if="isActive" @click="stop()">
+                  <i class="pause icon"></i> Pause
+                </button>
+                <button class="ui icon button huge" v-if="isStopped" @click="resume()">
+                  <i class="pause icon"></i> Resume
+                </button>
+                <button class="ui icon button huge" v-if="isStopped" @click="reset()">
+                  <i class="refresh icon"></i> Reset
+                </button>  
+              </div>
+            </div>
+          </div> 
+        </div>
+      </div>
+    </div>
 </template>
 
 <script>
@@ -82,32 +102,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "assets/styles/_colors.scss";
-
-#app {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.pomodori-count {
-    margin-bottom: 1em;
-}
-
-.timer-container {
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.title {
-    font-size: 4em;
-    color: $dominant-color;
-}
-
-.button-container .button {
-  padding: 3px 8px;
+.main.container {
+  padding-top: 13em;
 }
 </style>

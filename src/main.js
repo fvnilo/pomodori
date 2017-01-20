@@ -1,5 +1,4 @@
-import 'normalize.css';
-import 'assets/styles/base.scss';
+import 'semantic/semantic.css';
 
 import Vue from 'vue';
 

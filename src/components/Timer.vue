@@ -1,6 +1,6 @@
 <template>
-  <div class="timer">    
-    <span class="remaining-time">{{ minutes | twoDigits }}:{{ seconds | twoDigits }}</span>
+  <div class="remaining-time">    
+    <span>{{ minutes | twoDigits }}:{{ seconds | twoDigits }}</span>
   </div>
 </template>
 
@@ -32,14 +32,8 @@ export default {
 </script>
 
 <style scoped>
-.timer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .remaining-time {
   font-size: 6em;
-  margin: 20px 0;
+  margin: 1em 0;
 }
 </style>

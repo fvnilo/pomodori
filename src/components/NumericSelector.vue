@@ -1,8 +1,14 @@
 <template>
   <div class="numeric-selector">
-    <a class="decrease" @click="decrease()">-</a>
-    <input type="number" min="0" :value="value" disabled>
-    <a class="increase" @click="increase()">+</a>
+    <a class="decrease" @click="decrease()">
+      <i class="minus big icon"></i>
+    </a>
+    <div class="ui massive input">
+      <input type="number" min="0" :value="value" disabled>  
+    </div>
+    <a class="increase" @click="increase()">
+      <i class="plus big icon"></i>
+    </a>
   </div>
     
 </template>
@@ -33,26 +39,12 @@ export default {
 </script>
 
 <style scoped>
-.numeric-selector {
-  display: flex;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-}
-
-input {
-  text-align: center;
-
-  margin: 0 0.5em;
-  font-size: 3.5em;
-  font-weight: 200;
-
-  width: 2em;
+.input {
+  margin: 0.5em 0;
+  width: 4.5em;
 }
 
 a {
-  font-size: 3.5em;
+  cursor: pointer;
 }
 </style>

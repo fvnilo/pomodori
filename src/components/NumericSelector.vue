@@ -43,6 +43,7 @@ export default {
   display: flex;
   justify-content: center;
 }
+
 .value {
   font-size: 3em;
   color: rgba(0, 0, 0, 0.6);

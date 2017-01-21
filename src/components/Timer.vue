@@ -28,7 +28,7 @@ export default {
     const self = this;
 
     const container = this.$el.querySelector('#container');
-    const bar = new ProgressBar.Circle(container, {
+    const circleProgressBar = new ProgressBar.Circle(container, {
       color: '#aaa',
       strokeWidth: 4,
       trailWidth: 1,
@@ -43,10 +43,10 @@ export default {
       },
     });
 
-    bar.text.style.fontSize = '2rem';
-    bar.set(1.0);
+    circleProgressBar.text.style.fontSize = '2rem';
+    circleProgressBar.set(1.0);
 
-    this.progressBar = bar;
+    this.progressBar = circleProgressBar;
   },
 
   watch: {

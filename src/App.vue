@@ -7,20 +7,20 @@
     </div>
 
     <div class="ui center aligned main container timer">
-      <h2 class="ui header stopped" v-if="isFinished">Yay! You Finished Your {{ pomodoriCount }} Pomodori</h2>
-      <h2 class="ui header idle" v-if="isIdle || isFinished">Choose How Many Pomodori You Want To Complete</h2>
-      <h2 class="ui header active" v-if="isInProgress">Pomodoro In Progress</h2>
-      <h2 class="ui header pause" v-if="isBreak">You Deserve A Break!</h2>
-      <h2 class="ui header stopped" v-if="isStopped">Need A (Longer) Break?</h2>
+      <status-message :status="status"></status-message>
 
-      <numeric-selector class="pomodori-count" 
+      <numeric-selector 
+        class="pomodori-count" 
         v-if="isIdle || isFinished"
         :value="pomodoriCount" 
         @increase="increase"
         @decrease="decrease">  
       </numeric-selector>
 
-      <timer v-if="isActive || isStopped" :current-time="remainingTime" :total-time="totalTime">
+      <timer 
+        v-if="isActive || isStopped" 
+        :current-time="remainingTime" 
+        :total-time="totalTime">
       </timer>
 
       <div class="buttons">
@@ -53,6 +53,7 @@ import Push from 'push.js';
 import { mapState, mapActions } from 'vuex';
 
 import TopMenu from 'components/TopMenu';
+import StatusMessage from 'components/StatusMessage';
 import Timer from 'components/Timer';
 import NumericSelector from 'components/NumericSelector';
 
@@ -62,6 +63,7 @@ export default {
   name: 'app',
   components: {
     TopMenu,
+    StatusMessage,
     Timer,
     NumericSelector,
   },
@@ -85,11 +87,7 @@ export default {
       isActive: ({ status }) =>
         status === SequenceStatus.POMODORO_IN_PROGRESS || status === SequenceStatus.BREAK,
 
-      isInProgress: ({ status }) => status === SequenceStatus.POMODORO_IN_PROGRESS,
-
       isStopped: ({ status }) => status === SequenceStatus.STOPPED,
-
-      isBreak: ({ status }) => status === SequenceStatus.BREAK,
 
       isFinished: ({ status }) => status === SequenceStatus.FINISHED,
 
@@ -108,16 +106,23 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .main.container.intro {
   padding-top: 8em;
 }
+
 .main.container.timer {
   padding-top: 5em;
 }
+
+.pomodori-count {
+  padding-top: 1em;
+}
+
 .buttons {
   padding-top: 1em;
 }
+
 .ui.footer {
   position: absolute;
   bottom: 0;

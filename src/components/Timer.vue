@@ -1,39 +1,89 @@
 <template>
   <div class="remaining-time">    
-    <span>{{ minutes | twoDigits }}:{{ seconds | twoDigits }}</span>
+    <div id="container"></div>
   </div>
 </template>
 
 <script>
-import filters from 'src/filters';
+import ProgressBar from 'progressbar.js';
+
+import Helpers from 'src/helpers';
 
 export default {
   name: 'timer',
 
   props: {
-    value: {
+    currentTime: {
+      required: true,
+      type: Number,
+    },
+
+    totalTime: {
       required: true,
       type: Number,
     },
   },
 
+  mounted() {
+    const self = this;
+
+    const container = this.$el.querySelector('#container');
+    const bar = new ProgressBar.Circle(container, {
+      color: '#aaa',
+      strokeWidth: 4,
+      trailWidth: 1,
+      easing: 'easeInOut',
+      from: { color: '#aaa', width: 1 },
+      to: { color: '#333', width: 4 },
+      step(state, circle) {
+        circle.path.setAttribute('stroke', state.color);
+        circle.path.setAttribute('stroke-width', state.width);
+
+        circle.setText(self.remaningTime);
+      },
+    });
+
+    bar.text.style.fontSize = '2rem';
+    bar.set(1.0);
+
+    this.progressBar = bar;
+  },
+
+  watch: {
+    currentTime(time) {
+      const progress = time / this.totalTime;
+
+      this.progressBar.set(progress);
+    },
+  },
+
   computed: {
-    minutes() {
-      return Math.floor(this.value / 60);
+    remaningTime() {
+      const seconds = this.currentTime % 60;
+      const minutes = Math.floor(this.currentTime / 60);
+
+      return `${Helpers.twoDigits(minutes)}:${Helpers.twoDigits(seconds)}`;
     },
 
     seconds() {
       return this.value % 60;
     },
   },
-
-  filters,
 };
 </script>
 
 <style scoped>
 .remaining-time {
+  display: flex;
+
+  justify-content: center;
+
   font-size: 6em;
   margin: 1em 0;
+}
+
+#container {
+  height: 3em;
+  width: 3em;
 }
 </style>

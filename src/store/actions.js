@@ -1,16 +1,29 @@
+import Push from 'push.js';
+
 import * as MutationTypes from 'src/store/mutationTypes';
 import * as SequenceStatus from 'src/const/sequenceStatus';
+import * as NotificationMessages from 'src/const/notificationMessages';
+
+function showNotification(message) {
+  return Push.create('Pomodori', {
+    body: message,
+    timeout: 5000,
+  });
+}
 
 function runSequence(commit, state) {
   return setInterval(() => {
     if (state.remainingTime > 0) {
       commit(MutationTypes.TICK);
     } else if (state.status === SequenceStatus.POMODORO_IN_PROGRESS) {
-      commit(MutationTypes.START_BREAK);
+      showNotification(NotificationMessages.BREAK_STARTING)
+        .then(() => commit(MutationTypes.START_BREAK));
     } else if (state.pomodoriLeft > 0) {
-      commit(MutationTypes.START_NEXT_POMODORO);
+      showNotification(NotificationMessages.POMODORO_STARTING)
+        .then(() => commit(MutationTypes.START_NEXT_POMODORO));
     } else {
-      commit(MutationTypes.END);
+      showNotification(NotificationMessages.POMODORI_DONE)
+        .then(() => commit(MutationTypes.END));
     }
   }, 1000);
 }
@@ -25,10 +38,16 @@ export const increasePomodoriCount = ({ commit }) => commit(MutationTypes.INCREA
 
 export const decreasePomodoriCount = ({ commit }) => commit(MutationTypes.DECREASE_POMODORI_COUNT);
 
-export const start = ({ commit, state }) => commitRunRequence(commit, state, MutationTypes.START);
+export const start = ({ commit, state }) => {
+  showNotification(NotificationMessages.START_POMODORI)
+    .then(() => commitRunRequence(commit, state, MutationTypes.START));
+};
 
 export const stop = ({ commit }) => commit(MutationTypes.STOP);
 
 export const reset = ({ commit }) => commit(MutationTypes.RESET);
 
-export const resume = ({ commit, state }) => commitRunRequence(commit, state, MutationTypes.RESUME);
+export const resume = ({ commit, state }) => {
+  showNotification(NotificationMessages.RESUME_POMODORI)
+    .then(() => commitRunRequence(commit, state, MutationTypes.RESUME));
+};

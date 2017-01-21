@@ -31,7 +31,7 @@
           <i class="pause icon"></i> Pause
         </button>
         <button class="ui icon button huge" v-if="isStopped" @click="resume()">
-          <i class="pause icon"></i> Resume
+          <i class="play icon"></i> Resume
         </button>
         <button class="ui icon button huge" v-if="isStopped" @click="reset()">
           <i class="refresh icon"></i> Reset
@@ -48,6 +48,8 @@
 </template>
 
 <script>
+import Push from 'push.js';
+
 import { mapState, mapActions } from 'vuex';
 
 import TopMenu from 'components/TopMenu';
@@ -62,6 +64,12 @@ export default {
     TopMenu,
     Timer,
     NumericSelector,
+  },
+
+  mounted() {
+    if (!Push.Permission.has()) {
+      Push.Permission.request();
+    }
   },
 
   computed: {

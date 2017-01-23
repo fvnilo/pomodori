@@ -18,7 +18,7 @@ function runSequence(commit, state) {
     } else if (state.status === SequenceStatus.POMODORO_IN_PROGRESS) {
       showNotification(NotificationMessages.BREAK_STARTING)
         .then(() => commit(MutationTypes.START_BREAK));
-    } else if (state.pomodoriLeft > 0) {
+    } else if (state.remainingPomodori > 0) {
       showNotification(NotificationMessages.POMODORO_STARTING)
         .then(() => commit(MutationTypes.START_NEXT_POMODORO));
     } else {

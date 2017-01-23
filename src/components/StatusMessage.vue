@@ -1,10 +1,11 @@
 <template>
   <div id="status-message">
-    <h2 class="ui header stopped" v-if="isFinished">Yay! You Finished Your {{ pomodoriCount }} Pomodori</h2>
+    <h2 class="ui header stopped" v-if="isFinished">Congratulations! You Completed {{ pomodoriCount }} Pomodori!</h2>
     <h2 class="ui header idle" v-if="isIdle || isFinished">Choose How Many Pomodori You Want To Complete</h2>
     <h2 class="ui header in-progress" v-if="isInProgress">Pomodoro In Progress</h2>
     <h2 class="ui header pause" v-if="isBreak">You Deserve A Break!</h2>
     <h2 class="ui header stopped" v-if="isStopped">Need A (Longer) Break?</h2>
+    <h3 class="ui header remaining" v-if="!(isIdle || isFinished)">{{ remainingPomodori }} Pomodori Remaining</h3>
   </div>
 </template>
 
@@ -17,6 +18,16 @@ export default {
   props: {
     status: {
       type: String,
+      required: true,
+    },
+
+    remainingPomodori: {
+      type: Number,
+      required: true,
+    },
+
+    pomodoriCount: {
+      type: Number,
       required: true,
     },
   },

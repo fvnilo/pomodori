@@ -5,10 +5,14 @@ import * as SequenceStatus from 'src/const/sequenceStatus';
 import * as NotificationMessages from 'src/const/notificationMessages';
 
 function showNotification(message) {
-  return Push.create('Pomodori', {
-    body: message,
-    timeout: 5000,
-  });
+  if (Push.Permission.has()) {
+    return Push.create('Pomodori', {
+      body: message,
+      timeout: 5000,
+    });
+  }
+
+  return Promise.resolve();
 }
 
 function runSequence(commit, state) {

@@ -1,4 +1,5 @@
-import 'semantic/semantic.css';
+import 'semantic-ui-css/semantic.css';
+import 'semantic-ui-css/semantic';
 
 import Vue from 'vue';
 

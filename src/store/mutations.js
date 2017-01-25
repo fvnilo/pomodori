@@ -6,7 +6,7 @@ const BREAK_DURATION = 300;
 
 export const initialState = {
   pomodoriCount: 3,
-  pomodoriLeft: 0,
+  remainingPomodori: 0,
   status: SequenceStatus.IDLE,
   remainingTime: 0,
   totalTime: 0,
@@ -25,7 +25,7 @@ export const mutations = {
   [MutationTypes.START](state, timer) {
     state.remainingTime = POMODORO_DURATION;
     state.totalTime = POMODORO_DURATION;
-    state.pomodoriLeft = state.pomodoriCount - 1;
+    state.remainingPomodori = state.pomodoriCount;
     state.status = SequenceStatus.POMODORO_IN_PROGRESS;
     state.timer = timer;
   },
@@ -39,11 +39,11 @@ export const mutations = {
     state.status = SequenceStatus.BREAK;
     state.remainingTime = BREAK_DURATION;
     state.totalTime = BREAK_DURATION;
+    state.remainingPomodori -= 1;
   },
 
   [MutationTypes.START_NEXT_POMODORO](state) {
     state.status = SequenceStatus.POMODORO_IN_PROGRESS;
-    state.pomodoriLeft -= 1;
     state.remainingTime = POMODORO_DURATION;
     state.totalTime = POMODORO_DURATION;
   },
@@ -71,7 +71,7 @@ export const mutations = {
 
     state.status = SequenceStatus.IDLE;
     state.timer = null;
-    state.pomodoriLeft = 0;
+    state.remainingPomodori = 0;
     state.remainingTime = 0;
   },
 };

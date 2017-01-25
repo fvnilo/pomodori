@@ -7,7 +7,11 @@
     </div>
 
     <div class="ui center aligned main container timer">
-      <status-message :status="status"></status-message>
+      <status-message 
+        :status="status" 
+        :remaining-pomodori="remainingPomodori"
+        :pomodori-count="pomodoriCount">
+      </status-message>
 
       <numeric-selector 
         class="pomodori-count" 
@@ -92,6 +96,8 @@ export default {
       isFinished: ({ status }) => status === SequenceStatus.FINISHED,
 
       status: ({ status }) => status,
+
+      remainingPomodori: ({ remainingPomodori }) => remainingPomodori,
     }),
   },
 

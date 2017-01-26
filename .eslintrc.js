@@ -28,5 +28,8 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     // disallow param reassign but props are okay
     'no-param-reassign': ["error", { "props": false }]
+  },
+  env: {
+    browser: true
   }
 }

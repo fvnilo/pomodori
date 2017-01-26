@@ -62,7 +62,7 @@ export default {
       const seconds = this.currentTime % 60;
       const minutes = Math.floor(this.currentTime / 60);
 
-      return `${Helpers.twoDigits(minutes)}:${Helpers.twoDigits(seconds)}`;
+      return `${Helpers.toTwoDigits(minutes)}:${Helpers.toTwoDigits(seconds)}`;
     },
 
     seconds() {

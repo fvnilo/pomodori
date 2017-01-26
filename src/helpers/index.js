@@ -1,5 +1,5 @@
 export default {
-  twoDigits(value) {
+  toTwoDigits(value) {
     if (value.toString().length <= 1) {
       return `0${value}`;
     }

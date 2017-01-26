@@ -63,6 +63,20 @@ import NumericSelector from 'components/NumericSelector';
 
 import * as SequenceStatus from 'src/const/sequenceStatus';
 
+function requestPushPermission() {
+  if (!Push.Permission.has()) {
+    Push.Permission.request();
+  }
+}
+
+function registerUnloadHandler(context) {
+  window.addEventListener('beforeunload', (e) => {
+    if (!(context.isIdle || context.isFinished)) {
+      e.returnValue = 1;
+    }
+  });
+}
+
 export default {
   name: 'app',
   components: {
@@ -73,9 +87,8 @@ export default {
   },
 
   mounted() {
-    if (!Push.Permission.has()) {
-      Push.Permission.request();
-    }
+    requestPushPermission();
+    registerUnloadHandler(this);
   },
 
   computed: {

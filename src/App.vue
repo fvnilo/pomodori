@@ -23,6 +23,7 @@
 
       <timer 
         v-if="isActive || isStopped" 
+        @time-update="handleTimeUpdate"
         :current-time="remainingTime" 
         :total-time="totalTime">
       </timer>
@@ -112,15 +113,28 @@ export default {
 
       remainingPomodori: ({ remainingPomodori }) => remainingPomodori,
     }),
+
+    currentPomodoro: ({ pomodoriCount, remainingPomodori }) => pomodoriCount - remainingPomodori,
   },
 
   methods: {
     ...mapActions({
       increase: 'increasePomodoriCount',
       decrease: 'decreasePomodoriCount',
+      resetPomodori: 'reset',
     }),
 
-    ...mapActions(['start', 'stop', 'resume', 'reset']),
+    ...mapActions(['start', 'stop', 'resume']),
+
+    handleTimeUpdate(time) {
+      document.title = `(${this.currentPomodoro}/${this.pomodoriCount}) ${time} - Pomodori`;
+    },
+
+    reset() {
+      document.title = 'Pomodori';
+
+      this.resetPomodori();
+    },
   },
 };
 </script>

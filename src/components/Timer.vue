@@ -36,10 +36,14 @@ export default {
       from: { color: '#aaa', width: 1 },
       to: { color: '#333', width: 4 },
       step(state, circle) {
+        const time = self.remaningTime;
+
         circle.path.setAttribute('stroke', state.color);
         circle.path.setAttribute('stroke-width', state.width);
 
-        circle.setText(self.remaningTime);
+        self.$emit('time-update', time);
+
+        circle.setText(time);
       },
     });
 

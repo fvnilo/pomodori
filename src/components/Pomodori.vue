@@ -53,7 +53,7 @@ import NumericSelector from 'components/NumericSelector';
 import * as SequenceStatus from 'src/const/sequenceStatus';
 
 function registerUnloadHandler(context) {
-  context.$el.addEventListener('beforeunload', (e) => {
+  window.addEventListener('beforeunload', (e) => {
     if (!(context.isIdle || context.isFinished)) {
       e.returnValue = 1;
     }
